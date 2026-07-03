@@ -1,12 +1,11 @@
 /* ============================================================
    script.js — โค้ด JavaScript ของหน้า resume
-   ทำ 2 อย่าง:
-     (1) ย่อ/ขยายกระดาษ A4 ให้พอดีความกว้างจอ (รองรับมือถือ)
-     (2) อัปโหลดรูปโปรไฟล์ + จำรูปไว้ด้วย localStorage
+   หน้าที่: ย่อ/ขยายกระดาษ A4 ให้พอดีความกว้างจอ (รองรับมือถือ)
+   * รูปโปรไฟล์ฝังไว้ในโค้ด (index.html → photo.jpg) จึงไม่ต้องใช้ JS แล้ว
    ============================================================ */
 
 /* ==================================================
-   (1) ระบบย่อ-ขยายให้พอดีจอ (responsive scaling)
+   ระบบย่อ-ขยายให้พอดีจอ (responsive scaling)
    กระดาษกว้างคงที่ 794px ถ้าจอเล็กกว่านั้นจะ "ย่อทั้งใบ"
    ลงตามสัดส่วนเดิม แทนการจัดเรียงใหม่ → สวยเท่าเดิมทุกจอ
    ================================================== */
@@ -63,44 +62,3 @@ if (window.ResizeObserver) {
 // เรียกครั้งแรกตอนโหลดหน้า (เผื่อฟอนต์โหลดช้า จึงเรียกซ้ำอีกครั้ง)
 requestAnimationFrame(fitToScreen);
 setTimeout(fitToScreen, 400);
-
-
-/* ==================================================
-   (2) อัปโหลดรูปโปรไฟล์ + จำรูปด้วย localStorage
-   - คลิกที่กล่องรูป → เปิดหน้าต่างเลือกไฟล์
-   - เลือกรูปแล้ว → แสดงเป็นพื้นหลังของกล่อง
-   - เก็บรูป (แบบ base64) ไว้ใน localStorage → เปิดใหม่ยังอยู่
-   ================================================== */
-var STORAGE_KEY = 'resume-photo';   // ชื่อ key ที่ใช้เก็บรูปในเบราว์เซอร์
-
-var photoBox   = document.getElementById('photo');
-var photoInput = document.getElementById('photo-input');
-
-// ฟังก์ชันตั้งรูปให้กล่อง
-function setPhoto(dataUrl) {
-  photoBox.style.backgroundImage = 'url(' + dataUrl + ')';
-  photoBox.classList.add('has-image');   // ทำให้ข้อความ placeholder ถูกซ่อน (ดู style.css)
-}
-
-// เมื่อผู้ใช้เลือกไฟล์รูป
-if (photoInput) {
-  photoInput.addEventListener('change', function (e) {
-    var file = e.target.files[0];
-    if (!file) return;
-
-    var reader = new FileReader();
-    reader.onload = function () {
-      var dataUrl = reader.result;   // รูปในรูปแบบข้อความ base64
-      setPhoto(dataUrl);
-      // พยายามเก็บลง localStorage (ถ้ารูปใหญ่มากอาจเก็บไม่ได้ จึง try/catch)
-      try { localStorage.setItem(STORAGE_KEY, dataUrl); } catch (err) {}
-    };
-    reader.readAsDataURL(file);       // อ่านไฟล์เป็น base64
-  });
-}
-
-// ตอนเปิดหน้า : ถ้าเคยอัปโหลดรูปไว้ ให้ดึงกลับมาแสดง
-try {
-  var saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) setPhoto(saved);
-} catch (err) {}
