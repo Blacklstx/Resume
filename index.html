@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     RESUME - Nattasit Tinwong
+     โครงสร้างหน้าเว็บ (HTML) : กำหนด "เนื้อหา" ทั้งหมดของ resume
+     - style.css  : ควบคุมหน้าตา/สี/เลย์เอาต์
+     - script.js  : ทำให้ย่อ-ขยายตามจอ + อัปโหลดรูป
+     ============================================================ -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- viewport : ให้แสดงผลถูกต้องบนมือถือ/แท็บเล็ต -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nattasit Tinwong — Resume</title>
+
+  <!-- โหลดฟอนต์จาก Google Fonts : IBM Plex Mono (ตัวโค้ด) + IBM Plex Sans (ตัวเนื้อหา) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- ไฟล์สไตล์ทั้งหมดอยู่ที่ style.css -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- scaler-wrap : กล่องครอบไว้ให้ script.js ย่อ/ขยายทั้งใบให้พอดีจอ -->
+  <div id="resume-scaler-wrap" class="scaler-wrap">
+
+    <!-- card : ตัวกระดาษ resume ขนาด A4 (794 x 1123 px) -->
+    <div id="resume-card" class="card">
+
+      <!-- ==================== ส่วนหัว (ธีม terminal) ==================== -->
+      <header class="terminal">
+
+        <!-- แถบชื่อหน้าต่างแบบ terminal + จุดสี 3 จุด -->
+        <div class="titlebar">
+          <span class="dot dot--red"></span>
+          <span class="dot dot--yellow"></span>
+          <span class="dot dot--green"></span>
+          <span class="titlebar-path">nattasit@walailak: ~/job-application/resume.sh</span>
+        </div>
+
+        <!-- เนื้อหาส่วนหัว : ข้อความด้านซ้าย + รูปด้านขวา -->
+        <div class="header-inner">
+
+          <!-- ข้อความ : ชื่อ / ตำแหน่ง / ช่องทางติดต่อ -->
+          <div class="header-text">
+            <div class="prompt"><span class="gray">visitor@site</span>:<span class="blue">~</span>$ whoami</div>
+
+            <h1 class="name">Nattasit Tinwong</h1>
+
+            <!-- ตำแหน่งงานที่สมัคร -->
+            <div class="role"><span class="gray">role&nbsp;=</span> "Network &amp; Cybersecurity Engineer"</div>
+            <div class="subtitle">// open to Network / Security / Software roles</div>
+
+            <!-- ช่องทางติดต่อ -->
+            <div class="contacts">
+              <span class="contact"><span class="blue">&#9993;</span>&nbsp; ti.nattasit@gmail.com</span>
+              <span class="contact"><span class="blue">&#9742;</span>&nbsp; 096-067-9443</span>
+              <span class="contact"><span class="blue">&#9096;</span>&nbsp; Nakhon Si Thammarat, Thailand</span>
+            </div>
+          </div>
+
+          <!-- ช่องรูปโปรไฟล์ : คลิกเพื่ออัปโหลด (จัดการโดย script.js) -->
+          <label class="photo" id="photo" title="Click to upload your photo">
+            <!-- input file ซ่อนไว้ กดที่กล่องรูปแล้วจะเปิดหน้าต่างเลือกไฟล์ -->
+            <input type="file" id="photo-input" accept="image/*" hidden>
+            <span class="photo-placeholder" id="photo-placeholder">Click to<br>add photo</span>
+          </label>
+
+        </div>
+      </header>
+
+      <!-- ==================== เนื้อหาหลัก 2 คอลัมน์ ==================== -->
+      <div class="body">
+
+        <!-- ---------- คอลัมน์ซ้าย : ทักษะ / ใบรับรอง / ภาษา ---------- -->
+        <aside class="sidebar">
+
+          <!-- ทักษะ (แบ่งเป็นกลุ่ม) -->
+          <div class="section-title">// skills</div>
+
+          <div class="skill-label">languages</div>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">C</span>
+            <span class="chip">Java</span>
+            <span class="chip">SQL</span>
+            <span class="chip">Bash</span>
+          </div>
+
+          <div class="skill-label">networking</div>
+          <div class="chips">
+            <span class="chip">TCP/IP</span>
+            <span class="chip">Routing &amp; Switching</span>
+            <span class="chip">VLAN</span>
+            <span class="chip">DNS / DHCP</span>
+            <span class="chip">Cisco Packet Tracer</span>
+          </div>
+
+          <div class="skill-label">security</div>
+          <div class="chips">
+            <span class="chip">Nmap</span>
+            <span class="chip">Wireshark</span>
+            <span class="chip">Kali Linux</span>
+            <span class="chip">Vuln. scanning</span>
+            <span class="chip">Firewall / ACL</span>
+          </div>
+
+          <div class="skill-label">data &amp; tools</div>
+          <div class="chips chips--last">
+            <span class="chip">MySQL</span>
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">Database design</span>
+            <span class="chip">Git</span>
+            <span class="chip">Linux</span>
+          </div>
+
+          <!-- ใบรับรอง -->
+          <div class="section-title">// certifications</div>
+          <div class="cert-list">
+            <div class="cert"><span class="check">&#10003;</span> Cisco CCNA <span class="muted">(in progress)</span></div>
+            <div class="cert"><span class="check">&#10003;</span> CompTIA Network+</div>
+            <div class="cert"><span class="check">&#10003;</span> CompTIA Security+</div>
+            <div class="cert"><span class="check">&#10003;</span> Google Cybersecurity Certificate</div>
+            <div class="cert"><span class="check">&#10003;</span> Cisco Cyber Threat Management</div>
+          </div>
+
+          <!-- ภาษา -->
+          <div class="section-title">// languages</div>
+          <div class="lang-list">
+            <div class="lang-row"><span>Thai</span><span class="lang-level">native</span></div>
+            <div class="lang-row"><span>English</span><span class="lang-level">professional</span></div>
+          </div>
+
+        </aside>
+
+        <!-- ---------- คอลัมน์ขวา : สรุป / ประสบการณ์ / โปรเจกต์ / การศึกษา ---------- -->
+        <main class="main">
+
+          <!-- สรุปโดยย่อ -->
+          <div class="section-title">// summary</div>
+          <p class="summary">Third-year Computer Engineering &amp; AI student at Walailak University with a strong interest in network infrastructure and cybersecurity. Comfortable designing and simulating segmented networks, analyzing traffic, and building small security tooling in Python. Looking for an internship or entry-level role where I can grow in networking, security operations, or backend development.</p>
+
+          <!-- ประสบการณ์ -->
+          <div class="section-title section-title--rule">// experience</div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <div class="entry-title">Network Operations Intern</div>
+              <div class="entry-date">2025</div>
+            </div>
+            <div class="entry-org">Regional IT Services · Nakhon Si Thammarat</div>
+            <ul class="bullets">
+              <li>Assisted in configuring switches and VLANs and monitored campus/office links for uptime.</li>
+              <li>Used Wireshark to troubleshoot connectivity issues and documented recurring fault patterns.</li>
+            </ul>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <div class="entry-title">IT / Lab Assistant</div>
+              <div class="entry-date">2024 – 2025</div>
+            </div>
+            <div class="entry-org">School of Informatics, Walailak University</div>
+            <ul class="bullets">
+              <li>Maintained lab workstations and helped students with Linux, networking and database tasks.</li>
+              <li>Set up a small home lab (pfSense firewall + Linux servers) to practice security concepts.</li>
+            </ul>
+          </div>
+
+          <!-- โปรเจกต์ -->
+          <div class="section-title section-title--rule">// projects</div>
+
+          <div class="project">
+            <div class="project-title">Campus Network Redesign &amp; Segmentation</div>
+            <div class="project-stack">stack: Cisco Packet Tracer · VLAN · ACL · DHCP</div>
+            <div class="project-desc">Designed a VLAN-segmented topology with inter-VLAN routing and access control lists to isolate student, staff and server traffic.</div>
+          </div>
+
+          <div class="project">
+            <div class="project-title">Intrusion Detection Dashboard</div>
+            <div class="project-stack">stack: Python · Scapy · SQL · Flask</div>
+            <div class="project-desc">Captured and parsed packets to flag suspicious traffic, stored alerts in SQL and visualized them on a lightweight web dashboard.</div>
+          </div>
+
+          <div class="project">
+            <div class="project-title">Vulnerability Scanner CLI</div>
+            <div class="project-stack">stack: Python · Nmap · argparse</div>
+            <div class="project-desc">Built a command-line tool for host discovery and port/service enumeration that exports a readable scan report.</div>
+          </div>
+
+          <!-- การศึกษา -->
+          <div class="section-title section-title--rule">// education</div>
+          <div class="entry">
+            <div class="entry-head">
+              <div class="entry-title">B.Eng. Computer Engineering &amp; Artificial Intelligence</div>
+              <div class="entry-date">2024 – 2026</div>
+            </div>
+            <div class="entry-org">Walailak University · currently 3rd year</div>
+            <div class="edu-gpa">GPA <span class="gpa">2.79</span></div>
+          </div>
+
+        </main>
+      </div><!-- /.body -->
+
+    </div><!-- /.card -->
+  </div><!-- /.scaler-wrap -->
+
+  <!-- โค้ด JavaScript ทั้งหมดอยู่ที่ script.js -->
+  <script src="script.js"></script>
+</body>
+</html>

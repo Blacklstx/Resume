@@ -1,0 +1,163 @@
+/* ============================================================
+   style.css — สไตล์ทั้งหมดของหน้า resume
+   จัดกลุ่มตามส่วน: พื้นฐาน → หัว(terminal) → เนื้อหา → พิมพ์
+   ============================================================ */
+
+/* ---------- 1. พื้นฐาน / reset ---------- */
+* { box-sizing: border-box; }              /* ให้ padding/border รวมอยู่ในความกว้าง */
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: #e8eaed;                       /* สีพื้นโต๊ะรอบ ๆ กระดาษ */
+  font-family: 'IBM Plex Sans', sans-serif;  /* ฟอนต์เนื้อหาหลัก */
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;                        /* กันไม่ให้เลื่อนแนวนอนตอนย่อจอ */
+}
+
+/* ---------- 2. กล่องครอบ + กระดาษ A4 ---------- */
+.scaler-wrap { margin: 0 auto; }             /* จัดกึ่งกลาง (ขนาดจริงตั้งใน script.js) */
+
+.card {
+  width: 794px;                              /* กว้างเท่า A4 ที่ 96dpi */
+  min-height: 1123px;                        /* สูงเท่า A4 → พอดี 1 หน้าเวลาพิมพ์ */
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 0 10px 40px rgba(20, 25, 35, 0.14);  /* เงาให้ดูลอยเหมือนกระดาษ */
+  overflow: hidden;
+  color: #1b1f24;                            /* สีตัวอักษรหลัก (เกือบดำ) */
+}
+
+/* ---------- 3. ส่วนหัวธีม terminal ---------- */
+.terminal {
+  background: #1c2027;                        /* พื้นเข้มแบบหน้าจอ terminal */
+  color: #cfd4da;
+  font-family: 'IBM Plex Mono', monospace;   /* ฟอนต์ monospace ให้ดูเป็นโค้ด */
+}
+
+/* แถบชื่อหน้าต่าง (title bar) */
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  background: #14171c;
+  border-bottom: 1px solid #2b3038;
+}
+.dot { width: 11px; height: 11px; border-radius: 50%; }   /* จุดกลม 3 จุดมุมซ้าย */
+.dot--red    { background: #ec6a5e; }
+.dot--yellow { background: #f4bf4f; }
+.dot--green  { background: #61c554; }
+.titlebar-path { margin-left: 12px; font-size: 12px; color: #7d848e; letter-spacing: 0.2px; }
+
+/* กล่องเนื้อหาส่วนหัว : ข้อความ (ซ้าย) + รูป (ขวา) */
+.header-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 16px 40px 14px;
+}
+.header-text { flex: 1; min-width: 0; }      /* ข้อความยืดเต็มพื้นที่ที่เหลือ */
+
+.prompt   { font-size: 12.5px; color: #61c554; margin-bottom: 10px; }
+.name     { margin: 0; font-family: 'IBM Plex Sans', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+.role     { margin-top: 8px; font-size: 14.5px; color: #61c554; font-weight: 500; }
+.subtitle { margin-top: 3px; font-size: 12.5px; color: #8b929b; }
+
+/* สีตัวอักษรแบบ syntax highlight ที่ใช้ซ้ำ */
+.gray { color: #7d848e; }
+.blue { color: #5aa9e6; }
+
+/* แถวช่องทางติดต่อ (เรียงต่อกัน ขึ้นบรรทัดใหม่อัตโนมัติ) */
+.contacts { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 14px; font-size: 12px; }
+.contact  { background: #262b33; border: 1px solid #323841; padding: 5px 11px; border-radius: 5px; color: #cfd4da; }
+
+/* ช่องรูปโปรไฟล์ (คลิกเพื่ออัปโหลด) */
+.photo {
+  width: 104px; height: 128px;
+  flex-shrink: 0;                             /* ไม่ให้รูปถูกบีบเมื่อพื้นที่แคบ */
+  border: 1px solid #323841;
+  background: #262b33;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  background-size: cover;                     /* เมื่อมีรูป จะให้เต็มกรอบพอดี */
+  background-position: center;
+}
+.photo-placeholder { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8b929b; text-align: center; line-height: 1.4; }
+.photo.has-image .photo-placeholder { display: none; }   /* ซ่อนข้อความเมื่อมีรูปแล้ว */
+
+/* ---------- 4. เนื้อหาหลัก 2 คอลัมน์ ---------- */
+.body { display: flex; }
+
+.sidebar {
+  width: 278px;
+  flex-shrink: 0;
+  background: #f6f7f8;                         /* พื้นเทาอ่อนแยกจากคอลัมน์ขวา */
+  border-right: 1px solid #e7e9ec;
+  padding: 26px 26px 30px;
+}
+.main { flex: 1; padding: 22px 36px 8px; }
+
+/* หัวข้อแต่ละส่วน (เขียนแบบคอมเมนต์ในโค้ด //) */
+.section-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: #2f8f5b;                             /* เขียวแบบสี string ในโค้ด */
+  margin-bottom: 12px;
+}
+/* หัวข้อที่มีเส้นคั่นด้านล่าง (ใช้ในคอลัมน์ขวา) */
+.section-title--rule { padding-bottom: 7px; border-bottom: 1px solid #e7e9ec; margin-bottom: 12px; }
+
+/* --- ทักษะ --- */
+.skill-label { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #565d66; margin-bottom: 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.chips--last { margin-bottom: 22px; }         /* กลุ่มสุดท้ายเว้นห่างมากกว่าเล็กน้อย */
+.chip {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  background: #fff;
+  border: 1px solid #dfe2e6;
+  padding: 3px 9px;
+  border-radius: 5px;
+}
+
+/* --- ใบรับรอง --- */
+.cert-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
+.cert  { font-size: 12px; line-height: 1.35; }
+.check { color: #2f8f5b; font-family: 'IBM Plex Mono', monospace; }
+.muted { color: #8b929b; }
+
+/* --- ภาษา --- */
+.lang-list { display: flex; flex-direction: column; gap: 8px; }
+.lang-row  { display: flex; justify-content: space-between; font-size: 12.5px; }
+.lang-level { color: #8b929b; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; }
+
+/* --- สรุป --- */
+.summary { margin: 0 0 8px; font-size: 13px; line-height: 1.55; color: #3a4048; }
+
+/* --- ประสบการณ์ / การศึกษา (ใช้โครง .entry ร่วมกัน) --- */
+.entry { margin-bottom: 8px; }
+.entry-head  { display: flex; justify-content: space-between; align-items: baseline; }
+.entry-title { font-size: 13.5px; font-weight: 600; }
+.entry-date  { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8b929b; }
+.entry-org   { font-size: 12px; color: #2b6cb0; margin: 2px 0 7px; font-family: 'IBM Plex Mono', monospace; }
+.bullets { margin: 0; padding-left: 16px; font-size: 12.5px; line-height: 1.55; color: #3a4048; }
+
+/* --- โปรเจกต์ --- */
+.project { margin-bottom: 7px; }
+.project-title { font-size: 13px; font-weight: 600; }
+.project-stack { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8b929b; margin: 3px 0 5px; }
+.project-desc  { font-size: 12.5px; line-height: 1.5; color: #3a4048; }
+
+/* --- การศึกษา (GPA) --- */
+.edu-gpa { font-size: 12.5px; color: #3a4048; }
+.gpa { font-family: 'IBM Plex Mono', monospace; color: #c2703d; }   /* ส้มแบบสีตัวเลขในโค้ด */
+
+/* ---------- 5. ตอนสั่งพิมพ์ / บันทึก PDF ---------- */
+@media print {
+  body { background: #fff; }
+  .card { box-shadow: none; }                 /* เอาเงาออกเวลาพิมพ์ */
+  /* script.js จะรีเซ็ตการย่อขนาดกลับเป็น 100% ให้อัตโนมัติเวลาพิมพ์ */
+}
